@@ -12,19 +12,29 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <main>
+    <main class="flex-row ">
         <aside class="search col-md-2" >
             <h2>Search for a city:</h2>
             <form class="searchBar">
                 <input name="city" id="cityName" type="text" autofocus="true" class="form-input" />
                 <button type="submit" class="searchBtn">Search</button>
             </form>
-            
-            
+            <hr>
+            <!-- append search history buttons here -->
+            <section class="searchHistoryContainer"></section>
         </aside>
-        <section>
+        <div class="forecastcontainer col-md-8">
+            <section class="currentForecastContainer">
+                <h2 class="currentWeather">City<span id="searchCityName"></span></h2>
+                <h2 class="currentWeather">Date<span id="todayDate"></span></h2>
+                <p class="currentWeather">Temp:<span id="currentTemp"></span></p>
+                <p class="currentWeather">Wind:<span id="currentWind"></span></p>
+                <p class="currentWeather">Humidity:<span id="currentHumidity"></span></p>
+            </section>
+            <section class="futureForecast">
 
-        </section>
+            </section>
+        </div>
     </main>
     <script src="./assets/script.js"></script>
 </body>
