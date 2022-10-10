@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css" /> 
+    <!-- <script src="moment.js"></script> -->
     <title>Weather Forecast</title>
 </head>
 <body>
@@ -25,8 +26,8 @@
         </aside>
         <div class="forecastcontainer col-md-8">
             <section class="currentForecastContainer">
-                <h2 class="currentWeather">City<span id="searchCityName"></span></h2>
-                <h2 class="currentWeather">Date<span id="todayDate"></span></h2>
+                <h2  class="currentWeather"><span id="searchCityName">City:</span></h2>
+                <h2 class="currentWeather"><span id="currentDate"></span><span id="currentIcon"></span></h2>
                 <p class="currentWeather">Temp:<span id="currentTemp"></span></p>
                 <p class="currentWeather">Wind:<span id="currentWind"></span></p>
                 <p class="currentWeather">Humidity:<span id="currentHumidity"></span></p>
@@ -36,35 +37,35 @@
                 <section class="futureForecastContainer col-md-10">   
                     <div id="future1" class="futureWeather col-md-2">
                         <h3><span id="date1">Date</span></h3>
-                        <p>Icon</p>
+                        <p>Icon: <span id="icon1"></span></p>
                         <p>Temp: <span id="temp1"></span></p>
                         <p>Wind: <span id="wind1"></span></p>
                         <p>Humidity: <span id="humidity1"></span></p>
                     </div>
                     <div id="future2" class="futureWeather col-md-2">
                         <h3><span id="date2"></span></h3>
-                        <p>Icon</p>
+                        <p>Icon: <span id="icon2"></span></p>
                         <p>Temp: <span id="temp2"></span></p>
                         <p>Wind: <span id="wind2"></span></p>
                         <p>Humidity: <span id="humidity2"></span></p>
                     </div>
                     <div id="future3" class="futureWeather col-md-2">
                         <h3><span id="date3"></span></h3>
-                        <p>Icon</p>
+                        <p>Icon: <span id="icon3"></span></p>
                         <p>Temp: <span id="temp3"></span></p>
                         <p>Wind: <span id="wind3"></span></p>
                         <p>Humidity: <span id="humidity3"></span></p>
                     </div>
                     <div id="future4" class="futureWeather col-md-2">
                         <h3><span id="date4"></span></h3>
-                        <p>Icon</p>
+                        <p>Icon: <span id="icon4"></span></p>
                         <p>Temp: <span id="temp4"></span></p>
                         <p>Wind: <span id="wind4"></span></p>
                         <p>Humidity: <span id="humidity4"></span></p>
                     </div>
                     <div id="future5" class="futureWeather col-md-2">
                         <h3><span id="date5"></span></h3>
-                        <p>Icon</p>
+                        <p>Icon: <span id="icon5"></span></p>
                         <p>Temp: <span id="temp5"></span></p>
                         <p>Wind: <span id="wind5"></span></p>
                         <p>Humidity: <span id="humidity5"></span></p>
