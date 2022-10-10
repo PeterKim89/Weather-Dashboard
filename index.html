@@ -12,7 +12,7 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <main class="flex-row ">
+    <main class="flex-row">
         <aside class="search col-md-2" >
             <h2>Search for a city:</h2>
             <form class="searchBar">
@@ -31,9 +31,46 @@
                 <p class="currentWeather">Wind:<span id="currentWind"></span></p>
                 <p class="currentWeather">Humidity:<span id="currentHumidity"></span></p>
             </section>
-            <section class="futureForecast">
-
-            </section>
+            <div>
+                <h2 class="fiveDay">5-Day Forecast</h2>
+                <section class="futureForecastContainer col-md-10">   
+                    <div id="future1" class="futureWeather col-md-2">
+                        <h3><span id="date1"></span></h3>>
+                        <p>Icon</p>
+                        <p>Temp: <span id="temp1"></span></p>
+                        <p>Wind: <span id="wind1"></span></p>
+                        <p>Humidity: <span id="humidity1"></span></p>
+                    </div>
+                    <div id="future2" class="futureWeather col-md-2">
+                        <h3><span id="date2"></span></h3>>
+                        <p>Icon</p>
+                        <p>Temp: <span id="temp2"></span></p>
+                        <p>Wind: <span id="wind2"></span></p>
+                        <p>Humidity: <span id="humidity2"></span></p>
+                    </div>
+                    <div id="future3" class="futureWeather col-md-2">
+                        <h3><span id="date3"></span></h3>>
+                        <p>Icon</p>
+                        <p>Temp: <span id="temp3"></span></p>
+                        <p>Wind: <span id="wind3"></span></p>
+                        <p>Humidity: <span id="humidity3"></span></p>
+                    </div>
+                    <div id="future4" class="futureWeather col-md-2">
+                        <h3><span id="date4"></span></h3>>
+                        <p>Icon</p>
+                        <p>Temp: <span id="temp4"></span></p>
+                        <p>Wind: <span id="wind4"></span></p>
+                        <p>Humidity: <span id="humidity4"></span></p>
+                    </div>
+                    <div id="future5" class="futureWeather col-md-2">
+                        <h3><span id="date5"></span></h3>>
+                        <p>Icon</p>
+                        <p>Temp: <span id="temp5"></span></p>
+                        <p>Wind: <span id="wind5"></span></p>
+                        <p>Humidity: <span id="humidity5"></span></p>
+                    </div>
+                </section>
+            </div>
         </div>
     </main>
     <script src="./assets/script.js"></script>
