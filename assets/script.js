@@ -5,52 +5,46 @@
 var cityDataObject;
 var forecastContainersObj = [
     {
-        date: document.querySelector("#currentDate").textContent,
-        icon: document.querySelector("#currentIcon").textContent,
-        // temp: document.querySelector("#currentTemp").textContent,
+        date: "#currentDate",
+        icon: "#currentIcon",
         temp: "#currentTemp",
-        wind: document.querySelector("#currentWind").textContent,
-        humidity: document.querySelector("#currentHumidity").textContent
+        wind: "#currentWind",
+        humidity: "#currentHumidity"
     },
     {
-        date: document.querySelector("#date1").textContent,
-        icon: document.querySelector("#icon1").textContent,
-        // temp: document.querySelector("#temp1").textContent,
+        date: "#date1",
+        icon: "#icon1",
         temp: "#temp1",
-        wind: document.querySelector("#wind1").textContent,
-        humidity: document.querySelector("#humidity1").textContent
+        wind: "#wind1",
+        humidity: "#humidity1"
     },
     {
-        date: document.querySelector("#date2").textContent,
-        icon: document.querySelector("#icon2").textContent,
-        // temp: document.querySelector("#temp2").textContent,
+        date: "#date2",
+        icon: "#icon2",
         temp: "#temp2",
-        wind: document.querySelector("#wind2").textContent,
-        humidity: document.querySelector("#humidity2").textContent
+        wind: "#wind2",
+        humidity: "#humidity2"
     },
     {
-        date: document.querySelector("#date3").textContent,
-        icon: document.querySelector("#icon3").textContent,
-        // temp: document.querySelector("#temp3").textContent,
+        date: "#date3",
+        icon: "#icon3",
         temp: "#temp3",
-        wind: document.querySelector("#wind3").textContent,
-        humidity: document.querySelector("#humidity3").textContent
+        wind: "#wind3",
+        humidity: "#humidity3"
     },
     {
-        date: document.querySelector("#date4").textContent,
-        icon: document.querySelector("#icon4").textContent,
-        // temp: document.querySelector("#temp4").textContent,
+        date: "#date4",
+        icon: "#icon4",
         temp: "#temp4",
-        wind: document.querySelector("#wind4").textContent,
-        humidity: document.querySelector("#humidity4").textContent
+        wind: "#wind4",
+        humidity: "#humidity4"
     },
     {
-        date: document.querySelector("#date5").textContent,
-        icon: document.querySelector("#icon5").textContent,
-        // temp: document.querySelector("#temp5").textContent,
+        date: "#date5",
+        icon: "#icon5",
         temp: "#temp5",
-        wind: document.querySelector("#wind5").textContent,
-        humidity: document.querySelector("#humidity5").textContent
+        wind: "#wind5",
+        humidity: "#humidity5"
     }
 ]
 
@@ -88,7 +82,7 @@ var getCityData = function (url) {
                         .then (function (response) {
                             if(response.ok) {
                                 response.json().then(function (data2) {
-                                    // console.log(data2);
+                                    console.log(data2);
                                     cityDataObject = data2;
                                     // console.log(cityDataObject);
                                     for (i=0; i<6; i++)
@@ -97,8 +91,9 @@ var getCityData = function (url) {
                                         console.log(forecastContainersObj[i].temp)
                                         // forecastContainersObj[i].temp = data2.list[i].main.temp;
                                         document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[i].main.temp;
-                                        forecastContainersObj[i].wind = cityDataObject.list[i].main.wind;
-                                        forecastContainersObj[i].wind = cityDataObject.list[i].main.humidity;
+                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[i].wind.speed;
+                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[i].main.humidity;
+                                        
                                     }
                                 })
                             }
