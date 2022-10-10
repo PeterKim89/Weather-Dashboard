@@ -2,7 +2,6 @@
 // parse data for lat + lon
 // input lat + lon into the api to get the weather forecast
 // populate the containers with the parsed weather info
-var cityDataObject;
 var forecastContainersObj = [
     {
         date: "#currentDate",
@@ -89,10 +88,11 @@ var getCityData = function (url) {
                                     {
                                         console.log(data2.list[i].main.temp);
                                         console.log(forecastContainersObj[i].temp)
-                                        // forecastContainersObj[i].temp = data2.list[i].main.temp;
-                                        document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[i].main.temp;
-                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[i].wind.speed;
-                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[i].main.humidity;
+
+                                        document.querySelector(forecastContainersObj[i].date).textContent = " " + moment().format("MMMM, Do, YYYY")
+                                        document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[i].main.temp + "F";
+                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[i].wind.speed + " mph"; 
+                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[i].main.humidity + "%";
                                         
                                     }
                                 })
