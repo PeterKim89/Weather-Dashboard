@@ -52,7 +52,6 @@ var formSubmitHandler = function (event) {
     var cityName = document.querySelector("#cityName").value.trim();
     if (cityName) {
         console.log(cityName);
-        document.querySelector("#searchCityName").textContent = cityName;
         var geoApiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=308207fba2f306021f2d0ad086ed7b2f&units=imperial"
         getCityData(geoApiUrl, cityName);
         // passes the city name value to the Current Day Forecast
@@ -63,7 +62,9 @@ var formSubmitHandler = function (event) {
         pastSearch.setAttribute("class", "historyButton");
         pastSearch.innerHTML = cityName;
         // add click event handler to the button
-        // pastSearch.addEventListener("click", historyButtonHandler()); 
+        pastSearch.addEventListener("click", function(){
+            getCityData("https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=308207fba2f306021f2d0ad086ed7b2f&units=imperial", cityName)
+        }); 
         document.querySelector("#searchHistoryContainer").append(pastSearch);
 
     } 
@@ -79,6 +80,7 @@ var getCityData = function (url, city) {
             if(response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
+                    document.querySelector("#searchCityName").textContent = city;
                     document.querySelector(currentForecastObj.date).textContent = moment().format("MMMM, Do, YYYY");
                     document.querySelector(currentForecastObj.icon).src = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png"
                     document.querySelector(currentForecastObj.temp).textContent = " " + data.main.temp + "F";
@@ -90,7 +92,6 @@ var getCityData = function (url, city) {
                     
                     // add city + coordinates to local storage
                     localStorage.setItem(city, [cityLatitude,cityLongitude])
-
 
                     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+cityLatitude+"&lon="+cityLongitude+"&appid=fada60c7d193a5d0339eb9c9f0107eb5&units=imperial";
                     fetch(weatherApiUrl)
@@ -123,9 +124,10 @@ var getCityData = function (url, city) {
             }
         })
     .catch(function (error) {
-        alert("unable to connect to servers")
+        alert("unable to connect to servers");
     });
 }
+
 
 
 document.querySelector("#cityNameSearch").addEventListener("submit", formSubmitHandler);
