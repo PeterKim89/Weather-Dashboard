@@ -54,7 +54,7 @@ var formSubmitHandler = function (event) {
         console.log(cityName);
         document.querySelector("#searchCityName").textContent = cityName;
         var geoApiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=308207fba2f306021f2d0ad086ed7b2f&units=imperial"
-        getCityData(geoApiUrl);
+        getCityData(geoApiUrl, cityName);
         // passes the city name value to the Current Day Forecast
         document.querySelector("#cityName").value = "";
         // append a button to the search history with the city name
@@ -63,7 +63,7 @@ var formSubmitHandler = function (event) {
         pastSearch.setAttribute("class", "historyButton");
         pastSearch.innerHTML = cityName;
         // add click event handler to the button
-        pastSearch.addEventListener("click", historyButtonHandler()); 
+        // pastSearch.addEventListener("click", historyButtonHandler()); 
         document.querySelector("#searchHistoryContainer").append(pastSearch);
 
     } 
@@ -73,7 +73,7 @@ var formSubmitHandler = function (event) {
 };
 
 // takes in the geoapiurl with the specified city and retrieve's the latitude and longitude values
-var getCityData = function (url) {
+var getCityData = function (url, city) {
     fetch(url)
         .then(function (response) {
             if(response.ok) {
@@ -88,7 +88,9 @@ var getCityData = function (url) {
                     var cityLatitude = data.coord.lat; 
                     var cityLongitude = data.coord.lon;
                     
-                    // console.log(cityLatitude + ", " + cityLongitude)
+                    // add city + coordinates to local storage
+                    localStorage.setItem(city, [cityLatitude,cityLongitude])
+
 
                     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+cityLatitude+"&lon="+cityLongitude+"&appid=fada60c7d193a5d0339eb9c9f0107eb5&units=imperial";
                     fetch(weatherApiUrl)
@@ -126,4 +128,4 @@ var getCityData = function (url) {
 }
 
 
-document.querySelector("#cityNameSearch").addEventListener("click", formSubmitHandler);
+document.querySelector("#cityNameSearch").addEventListener("submit", formSubmitHandler);
