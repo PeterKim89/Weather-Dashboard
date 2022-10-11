@@ -57,12 +57,18 @@ var formSubmitHandler = function (event) {
         getCityData(geoApiUrl);
         // passes the city name value to the Current Day Forecast
         document.querySelector("#cityName").value = "";
-        
-        
+        // append a button to the search history with the city name
+        var pastSearch = document.createElement("button");
+        pastSearch.setAttribute("id", cityName+"Btn");
+        pastSearch.setAttribute("class", "historyButton");
+        pastSearch.innerHTML = cityName;
+        // add click event handler to the button
+        pastSearch.addEventListener("click", historyButtonHandler()); 
+        document.querySelector("#searchHistoryContainer").append(pastSearch);
+
     } 
     else {
         alert('Please enter a city');
-        // console.log("hello")
     }
 };
 
@@ -94,14 +100,13 @@ var getCityData = function (url) {
                                     // console.log(cityDataObject);
                                     for (i=0; i<5; i++) //TODO: change i<5 back to i<6
                                     {
-                                        
                                         var iteratedDate = moment();
                                         iteratedDate = iteratedDate.add(i+1,'d');
-                                        document.querySelector(forecastContainersObj[i].icon).src = "http://openweathermap.org/img/wn/"+data2.list[8*i].weather[0].icon+"@2x.png"
+                                        document.querySelector(forecastContainersObj[i].icon).src = "http://openweathermap.org/img/wn/"+data2.list[8*i+3].weather[0].icon+"@2x.png"
                                         document.querySelector(forecastContainersObj[i].date).textContent = " " + iteratedDate.format("MMMM, Do, YYYY");
-                                        document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[8*i].main.temp + "F";
-                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[8*i].wind.speed + " mph"; 
-                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[8*i].main.humidity + "%";
+                                        document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[8*i+3].main.temp + "F";
+                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[8*i+3].wind.speed + " mph"; 
+                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[8*i+3].main.humidity + "%";
                                         
                                     }
                                 })
@@ -121,18 +126,4 @@ var getCityData = function (url) {
 }
 
 
-
-// // using the lat+lon, get the city's weather data
-// var getCityForecast = function () {
-//     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+cityLatitude+"&lon="+cityLongitude+"&appid=308207fba2f306021f2d0ad086ed7b2f";
-//     fetch(weatherApiUrl)
-//     .then(function (response) {
-//         if(response.ok) {
-//             response.json().then(function (data) {
-//                 console.log(data);
-//             })
-//         }
-//     })
-// }
-
-document.querySelector("#cityNameSearch").addEventListener('submit', formSubmitHandler);
+document.querySelector("#cityNameSearch").addEventListener("click", formSubmitHandler);
