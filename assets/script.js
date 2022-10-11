@@ -74,7 +74,7 @@ var getCityData = function (url) {
                 response.json().then(function (data) {
                     console.log(data);
                     document.querySelector(currentForecastObj.date).textContent = moment().format("MMMM, Do, YYYY");
-                    // document.querySelector(currentForecastObj.icon).textContent 
+                    document.querySelector(currentForecastObj.icon).src = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png"
                     document.querySelector(currentForecastObj.temp).textContent = " " + data.main.temp + "F";
                     document.querySelector(currentForecastObj.wind).textContent = " " + data.wind.speed + " mph";
                     document.querySelector(currentForecastObj.humidity).textContent = " " + data.main.humidity + "%";
@@ -94,11 +94,10 @@ var getCityData = function (url) {
                                     // console.log(cityDataObject);
                                     for (i=0; i<5; i++) //TODO: change i<5 back to i<6
                                     {
-
-                                        // console.log(data2.list[8*i].main.temp);
-                                        console.log(forecastContainersObj[i].temp)
+                                        
                                         var iteratedDate = moment();
                                         iteratedDate = iteratedDate.add(i+1,'d');
+                                        document.querySelector(forecastContainersObj[i].icon).src = "http://openweathermap.org/img/wn/"+data2.list[8*i].weather[0].icon+"@2x.png"
                                         document.querySelector(forecastContainersObj[i].date).textContent = " " + iteratedDate.format("MMMM, Do, YYYY");
                                         document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[8*i].main.temp + "F";
                                         document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[8*i].wind.speed + " mph"; 
