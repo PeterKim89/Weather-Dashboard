@@ -2,14 +2,14 @@
 // parse data for lat + lon
 // input lat + lon into the api to get the weather forecast
 // populate the containers with the parsed weather info
-var forecastContainersObj = [
-    {
-        date: "#currentDate",
-        icon: "#currentIcon",
-        temp: "#currentTemp",
-        wind: "#currentWind",
-        humidity: "#currentHumidity"
-    },
+var currentForecastObj = {
+    date: "#currentDate",
+    icon: "#currentIcon",
+    temp: "#currentTemp",
+    wind: "#currentWind",
+    humidity: "#currentHumidity"
+}
+var forecastContainersObj = [ 
     {
         date: "#date1",
         icon: "#icon1",
@@ -53,7 +53,7 @@ var formSubmitHandler = function (event) {
     if (cityName) {
         console.log(cityName);
         document.querySelector("#searchCityName").textContent = cityName;
-        var geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=308207fba2f306021f2d0ad086ed7b2f"
+        var geoApiUrl = "https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid=308207fba2f306021f2d0ad086ed7b2f&units=imperial"
         getCityData(geoApiUrl);
         // passes the city name value to the Current Day Forecast
         document.querySelector("#cityName").value = "";
@@ -72,11 +72,19 @@ var getCityData = function (url) {
         .then(function (response) {
             if(response.ok) {
                 response.json().then(function (data) {
-                    var cityLatitude = data[0].lat; 
-                    var cityLongitude = data[0].lon;
+                    console.log(data);
+                    document.querySelector(currentForecastObj.date).textContent = moment().format("MMMM, Do, YYYY");
+                    // document.querySelector(currentForecastObj.icon).textContent 
+                    document.querySelector(currentForecastObj.temp).textContent = " " + data.main.temp + "F";
+                    document.querySelector(currentForecastObj.wind).textContent = " " + data.wind.speed + " mph";
+                    document.querySelector(currentForecastObj.humidity).textContent = " " + data.main.humidity + "%";
+
+                    var cityLatitude = data.coord.lat; 
+                    var cityLongitude = data.coord.lon;
+                    
                     // console.log(cityLatitude + ", " + cityLongitude)
 
-                    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+cityLatitude+"&lon="+cityLongitude+"&appid=308207fba2f306021f2d0ad086ed7b2f&units=imperial";
+                    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat="+cityLatitude+"&lon="+cityLongitude+"&appid=fada60c7d193a5d0339eb9c9f0107eb5&units=imperial";
                     fetch(weatherApiUrl)
                         .then (function (response) {
                             if(response.ok) {
@@ -84,15 +92,17 @@ var getCityData = function (url) {
                                     console.log(data2);
                                     cityDataObject = data2;
                                     // console.log(cityDataObject);
-                                    for (i=0; i<6; i++)
+                                    for (i=0; i<5; i++) //TODO: change i<5 back to i<6
                                     {
-                                        console.log(data2.list[i].main.temp);
-                                        console.log(forecastContainersObj[i].temp)
 
-                                        document.querySelector(forecastContainersObj[i].date).textContent = " " + moment().format("MMMM, Do, YYYY")
-                                        document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[i].main.temp + "F";
-                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[i].wind.speed + " mph"; 
-                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[i].main.humidity + "%";
+                                        // console.log(data2.list[8*i].main.temp);
+                                        console.log(forecastContainersObj[i].temp)
+                                        var iteratedDate = moment();
+                                        iteratedDate = iteratedDate.add(i+1,'d');
+                                        document.querySelector(forecastContainersObj[i].date).textContent = " " + iteratedDate.format("MMMM, Do, YYYY");
+                                        document.querySelector(forecastContainersObj[i].temp).textContent = " " + data2.list[8*i].main.temp + "F";
+                                        document.querySelector(forecastContainersObj[i].wind).textContent = " " + data2.list[8*i].wind.speed + " mph"; 
+                                        document.querySelector(forecastContainersObj[i].humidity).textContent = " " + data2.list[8*i].main.humidity + "%";
                                         
                                     }
                                 })
